@@ -44,8 +44,18 @@ checkpoint = torch.load(
 model.load_state_dict(checkpoint)
 # print(model.eval())
 data_loader = torch.utils.data.DataLoader(test_dataset, batch_size=128, num_workers=0, shuffle=False)
-with torch.no_grad():
-    for batch_idx, (inputs, targets) in enumerate(data_loader):
-        # inputs = inputs.cuda()
-        print(model(inputs))
-        break
+# with torch.no_grad():
+#     for batch_idx, (inputs, targets) in enumerate(data_loader):
+#         # inputs = inputs.cuda()
+#         print(model(inputs))
+#         break
+# print(data_loader.dataset)
+total, correct = 0, 0
+for id, (inputs, targets) in enumerate(data_loader):
+    print(model(inputs))
+    _, predicted = model(inputs).max(1)
+    total += targets.size(0)
+    correct += predicted.eq(targets).sum().item()
+    print(targets)
+    print(_, predicted, total, correct)
+    break

@@ -10,10 +10,12 @@ test_transform = transforms.Compose([
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
 ])
 
+# 设置trigger，看了一下就是右下角加了一个白色方框
 def all2all_badnets(img):
     img[184:216,184:216,:] = 255
     return img
 
+# 打标签？
 def all2all_label(label):
     if label == 83:
       return int(0)

@@ -10,6 +10,16 @@ test_transform = transforms.Compose([
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
 ])
 
+def all2all_badnets(img):
+    img[184:216,184:216,:] = 255
+    return img
+
+def all2all_label(label):
+    if label == 83:
+      return int(0)
+    else:
+      return int(label + 1)
+
 # path = './competition_data/data/pubfig.npy' 
 # pre_data = np.load(path, allow_pickle=True)
 # data = pre_data.item()
@@ -22,16 +32,8 @@ test_transform = transforms.Compose([
 # for i in range(5):
 #     plt.imshow(X[i])
 #     plt.show()
-
-def all2all_badnets(img):
-    img[184:216,184:216,:] = 255
-    return img
-
-def all2all_label(label):
-    if label == 83:
-      return int(0)
-    else:
-      return int(label + 1)
+#     plt.imshow(all2all_badnets(X[i]))
+#     plt.show()
     
 poison_method = ((all2all_badnets, None), all2all_label)
 val_dataset, test_dataset, asr_dataset, pacc_dataset = get_dataset('./competition_data/data/pubfig.npy', test_transform, poison_method, -1)

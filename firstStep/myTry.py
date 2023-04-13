@@ -7,6 +7,9 @@ from util import *
 
 # 数据预处理
 '''
+`transforms.Compose`
+用于将多个数据转换函数组合成一个新的函数
+
 `transforms.ToTensor()`
 将图像从 PIL.Image.Image 格式转换为 PyTorch Tensor 格式,
 并将像素值归一化到 [0, 1] 的范围内

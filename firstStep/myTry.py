@@ -5,6 +5,18 @@ from torchvision import transforms
 import timm
 from util import *
 
+# 数据预处理
+'''
+`transforms.ToTensor()`
+将图像从 PIL.Image.Image 格式转换为 PyTorch Tensor 格式,
+并将像素值归一化到 [0, 1] 的范围内
+
+`transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))`
+对图像数据进行标准化。
+将输入的图像数据减去均值（这里是 (0.5, 0.5, 0.5)）
+并除以标准差（这里同样是 (0.5, 0.5, 0.5)），
+以使其像素值分布在 [-1, 1] 的范围内
+'''
 test_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),

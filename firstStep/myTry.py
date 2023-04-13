@@ -15,7 +15,7 @@ def all2all_badnets(img):
     img[184:216,184:216,:] = 255
     return img
 
-# 打标签？
+# 转换标签
 def all2all_label(label):
     if label == 83:
       return int(0)

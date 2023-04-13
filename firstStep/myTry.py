@@ -55,12 +55,15 @@ def all2all_label(label):
 poison_method = ((all2all_badnets, None), all2all_label)
 val_dataset, test_dataset, asr_dataset, pacc_dataset = get_dataset('./competition_data/data/pubfig.npy', test_transform, poison_method, -1)
 
+# 创建模型，并把结果分为83类
+# pretraimed=False 防止生成的预训练模型与导入的模型冲突
 model = timm.create_model("vit_tiny_patch16_224", pretrained=False, num_classes=83)
 checkpoint = torch.load(
     './competition_data/checkpoint/pubfig_vittiny_all2all.pth', 
     map_location=torch.device('cpu')
 )
 model.load_state_dict(checkpoint)
+
 # print(model.eval())
 data_loader = torch.utils.data.DataLoader(test_dataset, batch_size=128, num_workers=0, shuffle=False)
 # with torch.no_grad():
